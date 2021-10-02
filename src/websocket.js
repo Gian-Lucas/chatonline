@@ -1,4 +1,6 @@
 const { io } = require("./http");
+const { zonedTimeToUtc } = require("date-fns-tz");
+const { format } = require("date-fns");
 
 const users = Array(0);
 const messages = Array(0);
@@ -26,13 +28,11 @@ io.on("connection", (socket) => {
   });
 
   socket.on("message", (data) => {
-    const hour = new Date();
-    const hours = `${hour.getHours()}:${hour.getMinutes()}`;
     const message = {
       username: data.username,
       room: data.room,
       text: data.message,
-      hours,
+      hours: getDate(),
     };
 
     messages.push(message);
@@ -45,4 +45,11 @@ function getMessagesRoom(room) {
   const messagesRoom = messages.filter((message) => message.room === room);
 
   return messagesRoom;
+}
+
+function getDate() {
+  const date = new Date();
+  const dateBrazil = zonedTimeToUtc(date, "America/Sao_Paulo");
+  const formattedDate = format(dateBrazil, "HH:mm");
+  return formattedDate;
 }
