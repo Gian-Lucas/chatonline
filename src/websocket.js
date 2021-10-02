@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("message", (data) => {
-    const hour = new Date().toLocaleString("pt-br");
+    const hour = new Date();
     const hours = `${hour.getHours()}:${hour.getMinutes()}`;
     const message = {
       username: data.username,
