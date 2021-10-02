@@ -1,6 +1,4 @@
 const { io } = require("./http");
-const { zonedTimeToUtc } = require("date-fns-tz");
-const { format } = require("date-fns");
 
 const users = Array(0);
 const messages = Array(0);
@@ -56,7 +54,4 @@ function getDate() {
   const hoursAndMinutes = `${hours}:${minutes}`;
 
   return hoursAndMinutes;
-  // const dateBrazil = zonedTimeToUtc(date, "America/Sao_Paulo");
-  // const formattedDate = format(dateBrazil, "HH:mm");
-  // return formattedDate;
 }
