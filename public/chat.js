@@ -25,13 +25,16 @@ socket.on("message", (data) => {
 });
 
 function renderMessage(data) {
-  document.querySelector(".message").innerHTML += `
+  const divMessage = document.querySelector(".message");
+  divMessage.innerHTML += `
     <div>
         <strong>${data.username}</strong>
         <span>${data.text}</span>
         <span>- ${data.hours}</span>
     </div>
     `;
+
+  divMessage.scrollTop = divMessage.scrollHeight;
 }
 
 inputMessage.addEventListener("keypress", (e) => {
