@@ -6,6 +6,7 @@ const btnExit = document.getElementById("btn-exit");
 const urlSearch = new URLSearchParams(window.location.search);
 const username = urlSearch.get("username");
 const room = urlSearch.get("select_room");
+const colorUsername = urlSearch.get("color_username");
 
 document.getElementById("room").innerHTML = `Sala ${room} - ${username}`;
 
@@ -14,6 +15,7 @@ socket.emit(
   {
     username,
     room,
+    colorUsername,
   },
   (messages) => {
     messages.forEach((message) => renderMessage(message));
@@ -28,7 +30,7 @@ function renderMessage(data) {
   const divMessage = document.querySelector(".message");
   divMessage.innerHTML += `
     <div>
-        <strong>${data.username}</strong>
+        <strong style="color: #${data.colorUsername};">${data.username}</strong>
         <span>${data.text}</span>
         <span>- ${data.hours}</span>
     </div>
@@ -58,6 +60,7 @@ function sendMessage() {
       username,
       message,
       room,
+      colorUsername,
     };
     socket.emit("message", data);
 

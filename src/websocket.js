@@ -17,6 +17,7 @@ io.on("connection", (socket) => {
       users.push({
         username: data.username,
         room: data.room,
+        colorUsername: data.colorUsername,
         socketid: socket.id,
       });
     }
@@ -29,6 +30,7 @@ io.on("connection", (socket) => {
     const message = {
       username: data.username,
       room: data.room,
+      colorUsername: data.colorUsername,
       text: data.message,
       hours: getDate(),
     };
