@@ -18,12 +18,10 @@
       <div
         class="mx-2 p-3 rounded bg-light"
       >
-        <button class="btn btn-danger">Sair</button>
-        <h3 class="text-center">Sala</h3>
+        <button id="btn-exit" class="btn btn-danger">Sair</button>
+        <h3 id="room" class="text-center">Sala</h3>
         <div class="message">
-          <strong>username</strong>
-          <span>message</span>
-          <span>- 10:45</span>
+          
         </div>
         <div class="row d-flex w-100">
           <div class="col-9">
@@ -35,10 +33,13 @@
             />
           </div>
           <div class="col-1">
-            <button class="btn btn-success mt-5">Enviar</button>
+            <button id="send-message" class="btn btn-success mt-5">Enviar</button>
           </div>
         </div>
       </div>
     </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./chat.js"></script>
   </body>
 </html>
