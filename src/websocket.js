@@ -48,8 +48,15 @@ function getMessagesRoom(room) {
 }
 
 function getDate() {
-  const date = new Date();
-  const dateBrazil = zonedTimeToUtc(date, "America/Sao_Paulo");
-  const formattedDate = format(dateBrazil, "HH:mm");
-  return formattedDate;
+  const dateBrazil = new Date().toLocaleString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+  });
+  const hours = dateBrazil[11] + dateBrazil[12];
+  const minutes = dateBrazil[14] + dateBrazil[15];
+  const hoursAndMinutes = `${hours}:${minutes}`;
+
+  return hoursAndMinutes;
+  // const dateBrazil = zonedTimeToUtc(date, "America/Sao_Paulo");
+  // const formattedDate = format(dateBrazil, "HH:mm");
+  // return formattedDate;
 }
