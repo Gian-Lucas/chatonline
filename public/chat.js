@@ -30,9 +30,9 @@ function renderMessage(data) {
   const divMessage = document.querySelector(".message");
   divMessage.innerHTML += `
     <div>
+        <span>${data.hours} - </span>
         <strong style="color: #${data.colorUsername};">${data.username}</strong>
         <span>${data.text}</span>
-        <span>- ${data.hours}</span>
     </div>
     `;
 
