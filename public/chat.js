@@ -8,8 +8,6 @@ const username = urlSearch.get("username");
 const room = urlSearch.get("select_room");
 const colorUsername = urlSearch.get("color_username");
 
-document.getElementById("room").innerHTML = `Sala ${room} - ${username}`;
-
 socket.emit(
   "select_room",
   {
@@ -25,6 +23,19 @@ socket.emit(
 socket.on("message", (data) => {
   renderMessage(data);
 });
+
+socket.on("users", (users) => {
+  renderUsers(users);
+});
+
+function renderUsers(users) {
+  document.getElementById("users").innerHTML = "";
+  users.forEach((user) => {
+    document.getElementById("users").innerHTML += `
+      <span style="color: #${user.colorUsername};">${user.username}</span>
+    `;
+  });
+}
 
 function renderMessage(data) {
   const divMessage = document.querySelector(".message");

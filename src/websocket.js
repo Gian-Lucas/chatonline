@@ -14,12 +14,15 @@ io.on("connection", (socket) => {
     if (userInRoom) {
       userInRoom.socketid = socket.id;
     } else {
+      console.log(data.username + " entrou!");
       users.push({
         username: data.username,
         room: data.room,
         colorUsername: data.colorUsername,
         socketid: socket.id,
       });
+      console.log(users);
+      io.to(data.room).emit("users", users);
     }
 
     const messagesRoom = getMessagesRoom(data.room);
@@ -38,6 +41,22 @@ io.on("connection", (socket) => {
     messages.push(message);
 
     io.to(data.room).emit("message", message);
+  });
+
+  socket.on("disconnect", () => {
+    const userDisconnected = users.find((user) => user.socketid === socket.id);
+
+    console.log(userDisconnected.username + " saiu!");
+
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].socketid === userDisconnected.socketid) {
+        users.splice(i, 1);
+
+        io.to(userDisconnected.room).emit("users", users);
+      }
+    }
+
+    console.log(users);
   });
 });
 
