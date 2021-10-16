@@ -18,12 +18,12 @@ socket.emit(
     colorUsername,
   },
   (messages) => {
-    messages.forEach((message) => renderMessage(message));
+    messages.forEach((message) => renderMessage(message, username));
   }
 );
 
 socket.on("message", (data) => {
-  renderMessage(data);
+  renderMessage(data, username);
 });
 
 socket.on("users", (users) => {
@@ -42,12 +42,14 @@ function renderUsers(users) {
   });
 }
 
-function renderMessage(data) {
+function renderMessage(data, username) {
   const divMessage = document.querySelector(".message");
   divMessage.innerHTML += `
     <div>
         <span>${data.hours}</span>
-        <strong style="color: #${data.colorUsername};">${data.username}</strong>
+        <strong style="color: #${data.colorUsername};">${
+    data.username === username ? username + " (você)" : data.username
+  }</strong>
         <span>${data.text}</span>
     </div>
     `;
