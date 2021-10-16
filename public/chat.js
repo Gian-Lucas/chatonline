@@ -31,6 +31,7 @@ socket.on("users", (users) => {
 function renderUsers(users) {
   document.getElementById("users").innerHTML = "";
   users.forEach((user) => {
+    document.getElementById("online-users").innerHTML = `Online: ${users.length}`;
     document.getElementById("users").innerHTML += `
       <span style="color: #${user.colorUsername};">${user.username}</span>
     `;
