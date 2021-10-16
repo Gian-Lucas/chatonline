@@ -37,6 +37,7 @@ io.on("connection", (socket) => {
       colorUsername: data.colorUsername,
       text: data.message,
       hours: getDate(),
+      socketId: socket.id,
     };
 
     messages.push(message);
