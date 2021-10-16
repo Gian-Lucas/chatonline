@@ -22,7 +22,8 @@ io.on("connection", (socket) => {
         socketid: socket.id,
       });
       console.log(users);
-      io.to(data.room).emit("users", users);
+      const usersOfRoom = users.filter((user) => user.room === data.room);
+      io.to(data.room).emit("users", usersOfRoom);
     }
 
     const messagesRoom = getMessagesRoom(data.room);
@@ -52,7 +53,11 @@ io.on("connection", (socket) => {
       if (users[i].socketid === userDisconnected.socketid) {
         users.splice(i, 1);
 
-        io.to(userDisconnected.room).emit("users", users);
+        const usersOfRoom = users.filter(
+          (user) => user.room === userDisconnected.room
+        );
+
+        io.to(userDisconnected.room).emit("users", usersOfRoom);
       }
     }
 
